@@ -7,18 +7,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cgi.assesment.recipe.entity.RecipeEntityBean;
+import com.cgi.assesment.recipe.exceptions.RecipeNotFoundException;
 import com.cgi.assesment.recipe.model.SearchInfoDTO;
 import com.cgi.assesment.recipe.repository.RecipeRepository;
 import com.cgi.assesment.recipe.services.RecipeServices;
 import com.cgi.assesment.recipe.utilities.ConversionUtility;
+import com.cgi.assesment.recipe.utilities.RecipeConversionUtility;
+import com.cgi.assesment.recipe.model.RecipeInfoDTO;
 /**
  * Represent Service class for Business Logic implementation of Recipe
  * @author prantik
  *
  */
 @Service
+@Transactional
 public class RecipeServicesImpl implements RecipeServices {
 	
 	@Autowired
@@ -30,10 +35,10 @@ public class RecipeServicesImpl implements RecipeServices {
 	@Override
 	public <RecipeInfoDTO> RecipeInfoDTO save(RecipeInfoDTO recipeDTO) {
 		RecipeEntityBean recipeEntityBean = new RecipeEntityBean();
-		recipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSoureceToTargetBean(recipeDTO, recipeEntityBean);
+		recipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(recipeDTO, recipeEntityBean);
 		recipeRepo.save(recipeEntityBean);
 		recipeEntityBean.setRecipeId(recipeEntityBean.getId());
-		recipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSoureceToTargetBean(recipeEntityBean, recipeDTO);
+		recipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSourceToTargetBean(recipeEntityBean, recipeDTO);
 		return recipeDTO;
 	}
 
@@ -41,13 +46,13 @@ public class RecipeServicesImpl implements RecipeServices {
 	 * update receipe in the database
 	 */
 	@Override
-	public <RecipeInfoDTO> RecipeInfoDTO update(RecipeInfoDTO receipeDTO) {
+	public <RecipeInfoDTO> RecipeInfoDTO update(RecipeInfoDTO receipeDTO) throws RecipeNotFoundException {
 		RecipeEntityBean receipeEntityBean = new RecipeEntityBean();
-		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSoureceToTargetBean(receipeDTO, receipeEntityBean);
+		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(receipeDTO, receipeEntityBean);
 		receipeEntityBean.setId(receipeEntityBean.getRecipeId());
 		recipeRepo.save(receipeEntityBean);
 		receipeEntityBean.setRecipeId(receipeEntityBean.getId());
-		receipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSoureceToTargetBean(receipeEntityBean,receipeDTO);
+		receipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSourceToTargetBean(receipeEntityBean,receipeDTO);
 		return receipeDTO;
 	}
 
@@ -60,7 +65,9 @@ public class RecipeServicesImpl implements RecipeServices {
 		if(recipeRepo.existsById(id)) {
 			recipeRepo.deleteById(id);			
 			result.set(true);
-		} 
+		} else {
+			throw new RecipeNotFoundException("No Recipe information details found!! Error in Recipe information deletion!!");
+		}
 		return result.get();
 		
 	}
@@ -69,11 +76,11 @@ public class RecipeServicesImpl implements RecipeServices {
 	 * search receipes with different search criteria
 	 */
 	@Override
-	public List<RecipeEntityBean> search(SearchInfoDTO searchDTO) {
+	public List<RecipeInfoDTO> search(SearchInfoDTO searchDTO) {
 		String queryText = "";
 		List<RecipeEntityBean> receipeList;
 		String searchBy = "";
-		if(Optional.of(searchDTO).isEmpty()) {
+		if(Optional.ofNullable(searchDTO).isEmpty()) {
 			receipeList = recipeRepo.findAll();
 		} else {
 			if(Optional.ofNullable(searchDTO.getIsVegetarian()).isPresent()) {
@@ -127,7 +134,11 @@ public class RecipeServicesImpl implements RecipeServices {
 					receipeList = new ArrayList<RecipeEntityBean>();
 			}
 		}
-		return receipeList;
+		List<RecipeInfoDTO> recipeInfoDTOs = null;
+		if(Optional.ofNullable(receipeList).isPresent() && receipeList.size()>0) {
+			recipeInfoDTOs = RecipeConversionUtility.convertFromEntityToDTO(receipeList);
+		}
+		return recipeInfoDTOs;
 	}
 
 }

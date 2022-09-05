@@ -14,7 +14,7 @@ import com.cgi.assesment.recipe.model.RecipeInfoDTO;
 public class ConversionUtility {
 
 
-	public static <T> T convertFromSoureceToTargetBean(T sourceBean, T targetBean) {		
+	public static <T> T convertFromSourceToTargetBean(T sourceBean, T targetBean) {		
 		List<Field> sourcePropList = Arrays.asList(sourceBean.getClass().getDeclaredFields());		
 		List<Field> targetPropList = Arrays.asList(targetBean.getClass().getDeclaredFields());
 		
@@ -43,6 +43,7 @@ public class ConversionUtility {
 	
 	
 	
+	
 	public static void main(String args[]) {
 		RecipeEntityBean receipeEntityBean = new RecipeEntityBean();
 		RecipeInfoDTO receipeInfoBean = new RecipeInfoDTO();
@@ -50,7 +51,7 @@ public class ConversionUtility {
 		receipeInfoBean.instructionsReq = "test oven";
 		receipeInfoBean.noOfServingsReq = 4;
 		receipeInfoBean.ingredientsReq = Arrays.asList("potatoes","brinjal");
-		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSoureceToTargetBean(receipeInfoBean, receipeEntityBean);
+		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(receipeInfoBean, receipeEntityBean);
 		System.out.println(receipeEntityBean.toString());
 		
 	}
