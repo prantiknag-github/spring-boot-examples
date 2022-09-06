@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cgi.assesment.recipe.model.SearchInfoDTO;
-
+/**
+ * Represent to validate search criteria
+ * @author prantik
+ *
+ */
 public class RecipeValidator {
 	
 	public SearchInfoDTO validateSearchCriteria(Boolean isVeg,Integer servedFor,List<String> includeIngredient,

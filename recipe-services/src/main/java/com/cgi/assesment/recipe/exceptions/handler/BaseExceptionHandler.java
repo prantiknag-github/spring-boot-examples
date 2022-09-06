@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.cgi.assesment.recipe.utilities.RestApiError;
 import com.cgi.assesment.recipe.utilities.ResponseUtils;
-
+/**
+ * Represent to handle common exception
+ * @author prantik
+ *
+ */
 @Order(Integer.MIN_VALUE)
 @ControllerAdvice
 public class BaseExceptionHandler {
@@ -22,7 +26,7 @@ public class BaseExceptionHandler {
 	@ExceptionHandler({MethodArgumentNotValidException.class})
 	public ResponseEntity<RestApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 		BindingResult result= ex.getBindingResult();
-		RestApiError apiError = new RestApiError(HttpStatus.BAD_REQUEST,"No. of Validation errors:"+result.getFieldErrorCount());
+		RestApiError apiError = new RestApiError(HttpStatus.BAD_REQUEST,"No. of Validation errors: "+result.getFieldErrorCount());
 		return ResponseUtils.buildErrorResponse(apiError);
 	}
 	

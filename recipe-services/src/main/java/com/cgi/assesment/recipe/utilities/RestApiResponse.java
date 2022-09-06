@@ -6,7 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+/**
+ * Represent Response from API 
+ * @author prant
+ *
+ * @param <T>
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestApiResponse<T> {
 	

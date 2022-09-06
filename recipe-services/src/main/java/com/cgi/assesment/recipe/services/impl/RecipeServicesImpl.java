@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ import com.cgi.assesment.recipe.repository.RecipeRepository;
 import com.cgi.assesment.recipe.services.RecipeServices;
 import com.cgi.assesment.recipe.utilities.ConversionUtility;
 import com.cgi.assesment.recipe.utilities.RecipeConversionUtility;
+
+import ch.qos.logback.classic.Logger;
+
 import com.cgi.assesment.recipe.model.RecipeInfoDTO;
 /**
  * Represent Service class for Business Logic implementation of Recipe
@@ -26,6 +30,8 @@ import com.cgi.assesment.recipe.model.RecipeInfoDTO;
 @Transactional
 public class RecipeServicesImpl implements RecipeServices {
 	
+	private static Logger logger = (Logger) LoggerFactory.getLogger(RecipeServicesImpl.class);
+	
 	@Autowired
 	private RecipeRepository recipeRepo;
 
@@ -34,11 +40,14 @@ public class RecipeServicesImpl implements RecipeServices {
 	 */
 	@Override
 	public <RecipeInfoDTO> RecipeInfoDTO save(RecipeInfoDTO recipeDTO) {
+		logger.info("invoke save()");
+		logger.debug("invoke save() payload:",recipeDTO);		
 		RecipeEntityBean recipeEntityBean = new RecipeEntityBean();
 		recipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(recipeDTO, recipeEntityBean);
 		recipeRepo.save(recipeEntityBean);
 		recipeEntityBean.setRecipeId(recipeEntityBean.getId());
 		recipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSourceToTargetBean(recipeEntityBean, recipeDTO);
+		logger.debug("response:",recipeDTO);
 		return recipeDTO;
 	}
 
@@ -46,14 +55,17 @@ public class RecipeServicesImpl implements RecipeServices {
 	 * update receipe in the database
 	 */
 	@Override
-	public <RecipeInfoDTO> RecipeInfoDTO update(RecipeInfoDTO receipeDTO) throws RecipeNotFoundException {
+	public <RecipeInfoDTO> RecipeInfoDTO update(RecipeInfoDTO recipeDTO) throws RecipeNotFoundException {
+		logger.info("invoke update()");
+		logger.debug("invoke update() payload:",recipeDTO);	
 		RecipeEntityBean receipeEntityBean = new RecipeEntityBean();
-		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(receipeDTO, receipeEntityBean);
+		receipeEntityBean = (RecipeEntityBean) ConversionUtility.convertFromSourceToTargetBean(recipeDTO, receipeEntityBean);
 		receipeEntityBean.setId(receipeEntityBean.getRecipeId());
 		recipeRepo.save(receipeEntityBean);
 		receipeEntityBean.setRecipeId(receipeEntityBean.getId());
-		receipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSourceToTargetBean(receipeEntityBean,receipeDTO);
-		return receipeDTO;
+		recipeDTO = (RecipeInfoDTO) ConversionUtility.convertFromSourceToTargetBean(receipeEntityBean,recipeDTO);
+		logger.debug("response:",recipeDTO);
+		return recipeDTO;
 	}
 
 	/**
@@ -61,11 +73,14 @@ public class RecipeServicesImpl implements RecipeServices {
 	 */
 	@Override
 	public Boolean delete(String id) {
+		logger.info("invoke delete()");
+		logger.debug("invoke delete() payload:",id);	
 		AtomicBoolean result = new AtomicBoolean(false);
 		if(recipeRepo.existsById(id)) {
 			recipeRepo.deleteById(id);			
 			result.set(true);
 		} else {
+			logger.debug("response:",result.get());
 			throw new RecipeNotFoundException("No Recipe information details found!! Error in Recipe information deletion!!");
 		}
 		return result.get();
@@ -77,6 +92,8 @@ public class RecipeServicesImpl implements RecipeServices {
 	 */
 	@Override
 	public List<RecipeInfoDTO> search(SearchInfoDTO searchDTO) {
+		logger.info("invoke search()");
+		logger.debug("invoke search() payload:",searchDTO);
 		String queryText = "";
 		List<RecipeEntityBean> receipeList;
 		String searchBy = "";
@@ -138,6 +155,7 @@ public class RecipeServicesImpl implements RecipeServices {
 		if(Optional.ofNullable(receipeList).isPresent() && receipeList.size()>0) {
 			recipeInfoDTOs = RecipeConversionUtility.convertFromEntityToDTO(receipeList);
 		}
+		logger.debug("response:",recipeInfoDTOs);
 		return recipeInfoDTOs;
 	}
 

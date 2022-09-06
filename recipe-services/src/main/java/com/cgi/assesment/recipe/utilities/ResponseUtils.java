@@ -2,7 +2,11 @@ package com.cgi.assesment.recipe.utilities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+/**
+ * Represent builiding of API response
+ * @author prant
+ *
+ */
 public class ResponseUtils {
 	
 	public ResponseUtils() {

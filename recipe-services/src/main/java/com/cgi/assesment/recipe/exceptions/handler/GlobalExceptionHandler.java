@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.cgi.assesment.recipe.exceptions.RecipeNotFoundException;
 import com.cgi.assesment.recipe.utilities.RestApiError;
 import com.cgi.assesment.recipe.utilities.ResponseUtils;
-
+/**
+ * Represent to handle user defined and common exceptions
+ * @author prantik
+ *
+ */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class GlobalExceptionHandler extends BaseExceptionHandler {

@@ -1,5 +1,8 @@
 package com.cgi.assesment.recipe.utilities;
-
+/**
+ * Represent Error response from API
+ * @author prantik
+ */
 import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;

@@ -11,7 +11,7 @@ import com.cgi.assesment.recipe.entity.RecipeEntityBean;
 
 
 /**
- * Represent Recipe Repository and contains various search criteria
+ * Represent Recipe Repository used for persist, update recipe data and contains various search criteria
  * implemented with @Query for custom search
  * @author prantik
  *
