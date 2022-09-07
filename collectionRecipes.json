@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "6316475ed1749504e77c71c6"
+  },
+  "recipeName": "Enchilada",
+  "cuisine": "Mexican",
+  "isVegetarian": false,
+  "noOfServings": 4,
+  "ingredients": [
+    "meat",
+    "flour",
+    "chilli sauce",
+    "cheese"
+  ],
+  "instructions": "Deep fried in oil",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+},{
+  "_id": {
+    "$oid": "6316481dd1749504e77c71c7"
+  },
+  "recipeName": "Bhapa Ilish",
+  "cuisine": "Indian",
+  "isVegetarian": false,
+  "noOfServings": 2,
+  "ingredients": [
+    "hilsa fish",
+    "mustard",
+    "curd",
+    "green chillis"
+  ],
+  "instructions": "Steam in hot water",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+},{
+  "_id": {
+    "$oid": "631648c9d1749504e77c71c8"
+  },
+  "recipeName": "Peking Duck",
+  "cuisine": "Oriental",
+  "isVegetarian": false,
+  "noOfServings": 4,
+  "ingredients": [
+    "duck",
+    "scallion",
+    "onion",
+    "potatoes",
+    "sauce",
+    "butter"
+  ],
+  "instructions": "Slow cooked in Steam",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+},{
+  "_id": {
+    "$oid": "63164ac3d1749504e77c71ca"
+  },
+  "recipeName": "Veg Jhalfrezi",
+  "cuisine": "Indian",
+  "isVegetarian": true,
+  "noOfServings": 4,
+  "ingredients": [
+    "potatoes",
+    "pumpkin",
+    "onion"
+  ],
+  "instructions": "cooked with mustard oil in oven.",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+},{
+  "_id": {
+    "$oid": "63164b9ad1749504e77c71cb"
+  },
+  "recipeName": "Fish Steak",
+  "cuisine": "Continental",
+  "isVegetarian": false,
+  "noOfServings": 5,
+  "ingredients": [
+    "salmon",
+    "butter",
+    "sauce",
+    "lemon",
+    "broth"
+  ],
+  "instructions": "baked with butter in oven.",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+},{
+  "_id": {
+    "$oid": "63173932d9ff28562a787da3"
+  },
+  "recipeName": "Recipe Example",
+  "cuisine": "Cuisine Example",
+  "isVegetarian": true,
+  "noOfServings": 4,
+  "ingredients": [
+    "potatoes",
+    "onions"
+  ],
+  "instructions": "xx",
+  "_class": "com.cgi.assesment.recipe.entity.RecipeEntityBean"
+}]

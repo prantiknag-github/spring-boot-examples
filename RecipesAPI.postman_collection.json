@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "fe52398d-efd9-472e-8477-e7ff2dd0bf5a",
+		"name": "RecipesAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Recipe Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recipe_name\": \"Fish Steak\",\r\n    \"cuisine\": \"Continental\",\r\n    \"is_vegetarian\": false,\r\n    \"no_of_servings\": 5,\r\n    \"ingredients\": [\"Salmon\",\"Butter\",\"Sauce\",\"lemon\", \"Broth\"],\r\n    \"instructions\": \"baked with butter in oven.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Recipe Details",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"recipe_id\": \"631648c9d1749504e77c71c8\",\r\n            \"recipe_name\": \"Peking Duck\",\r\n            \"cuisine\": \"Oriental\",\r\n            \"is_vegetarian\": false,\r\n            \"no_of_servings\": 4,\r\n            \"ingredients\": [\r\n                \"duck\",\r\n                \"scallion\",\r\n                \"onion\",\r\n                \"potatoes\",\r\n                \"sauce\",\r\n                \"butter\"\r\n            ],\r\n            \"instructions\": \"Slow cooked in Steam\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Recipes Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By No. of Servings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?servedFor=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "servedFor",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By dish is vegeterian or not",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes?isVeg=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "isVeg",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By exclude ingredients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?excludeIngredients=potatoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "excludeIngredients",
+							"value": "potatoes"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By include ingredients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?includeIngredients=potatoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "includeIngredients",
+							"value": "potatoes"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By instructions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?instructions=oven",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "instructions",
+							"value": "oven"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By include ingredients and no. of servings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?includeIngredients=potatoes&servedFor=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "includeIngredients",
+							"value": "potatoes"
+						},
+						{
+							"key": "servedFor",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By exclude ingredients and instructions contains text",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/?excludeIngredients=salmon&instructions=oven",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						""
+					],
+					"query": [
+						{
+							"key": "excludeIngredients",
+							"value": "salmon"
+						},
+						{
+							"key": "instructions",
+							"value": "oven"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Recipe Details by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/recipes/631651bfcaed45274fb22f8c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"recipes",
+						"631651bfcaed45274fb22f8c"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

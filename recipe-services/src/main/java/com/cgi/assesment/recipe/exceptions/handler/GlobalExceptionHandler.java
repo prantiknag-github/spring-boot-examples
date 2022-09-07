@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.cgi.assesment.recipe.exceptions.RecipeNotFoundException;
-import com.cgi.assesment.recipe.utilities.RestApiError;
 import com.cgi.assesment.recipe.utilities.ResponseUtils;
+import com.cgi.assesment.recipe.utilities.RestApiError;
 /**
  * Represent to handle user defined and common exceptions
  * @author prantik
@@ -24,5 +24,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
 		RestApiError apiError = new RestApiError(HttpStatus.NOT_FOUND, ex.getMessage());
 		return  ResponseUtils.buildErrorResponse(apiError);
 	}
+	
+	
 
 }
